@@ -6,7 +6,7 @@ import psutil
 import win32gui
 import win32process
 
-from .utils.logger import setup_logger
+from .utils.logger import LoggerManager
 
 class WindowMonitor:
     def __init__(self):
@@ -14,7 +14,7 @@ class WindowMonitor:
         self._running = False
         self.start_time = None
         self._monitor_thread = None
-        self.logger = setup_logger()
+        self.logger = LoggerManager.get_logger(__name__)
         self.logger.info("WindowMonitor initialized")
 
     def get_active_window_info(self):
@@ -108,4 +108,3 @@ class WindowMonitor:
 
             self.current_window = window_info
             self.start_time = window_info['timestamp']
-
